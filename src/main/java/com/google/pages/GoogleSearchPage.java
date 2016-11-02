@@ -5,13 +5,11 @@ import static com.codeborne.selenide.Selenide.open;
 
 
 
-public class GoogleSearchPage {
+public class GoogleSearchPage extends BasePage{
 
     public void navigateToGoogle(){
         open("https://www.google.com/");
     }
 
-    public void setQuery(String query){
-        $("#lst-ib").setValue(query).submit();
-    }
+
 }
