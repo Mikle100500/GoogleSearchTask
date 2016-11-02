@@ -1,7 +1,8 @@
 package com.google;
 
-import com.google.pages.GooglePage;
 import org.junit.Test;
+
+import static com.google.pages.GoogleSearch.*;
 
 /**
  Automate:
@@ -22,18 +23,16 @@ import org.junit.Test;
  */
 public class GoogleE2ETest {
 
-    public GooglePage page = new GooglePage();
-
     @Test
     public void testGoogleSearch(){
-        //precondition
-        page.navigateToGoogle();
-        page.search("Selenium automates browsers");
 
-        assert page.countAnswersPerPage() == 10;
+        navigateToGoogle();
+        search("Selenium automates browsers");
 
-        page.clickLink("Selenium automates browsers");
+        assertAnswers(10);
 
-        assert page.getTitle().equals("http://docs.seleniumhq.org/");
+        clickLink("Selenium automates browsers");
+
+        assertTitle("http://docs.seleniumhq.org/");
     }
 }
