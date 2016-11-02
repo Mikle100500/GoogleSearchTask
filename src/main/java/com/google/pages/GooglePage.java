@@ -1,10 +1,12 @@
 package com.google.pages;
 
 import com.codeborne.selenide.ElementsCollection;
+import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class BasePage {
+public class GooglePage {
 
     public ElementsCollection answers = $$(".g");
 
@@ -22,5 +24,9 @@ public class BasePage {
 
     public String getTitle(){
         return title();
+    }
+    public void clickLink(String linkText) {
+        $(By.partialLinkText(linkText)).click();
+
     }
 }

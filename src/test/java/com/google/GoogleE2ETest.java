@@ -1,6 +1,6 @@
 package com.google;
 
-import com.google.pages.SearchResaultPage;
+import com.google.pages.GooglePage;
 import org.junit.Test;
 
 /**
@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 public class GoogleE2ETest {
 
-    public SearchResaultPage page = new SearchResaultPage();
+    public GooglePage page = new GooglePage();
 
     @Test
     public void testGoogleSearch(){
