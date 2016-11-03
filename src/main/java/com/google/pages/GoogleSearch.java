@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class GoogleSearch {
 
     public static void navigateToGoogle(){
-        open("https://www.google.com/");
+        open("https://www.google.com/ncr");
     }
 
     public static void search(String query){
