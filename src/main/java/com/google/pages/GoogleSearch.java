@@ -1,30 +1,40 @@
 package com.google.pages;
 
-import org.openqa.selenium.By;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 
 public class GoogleSearch {
 
-    public static void navigateToGoogle(){
+    public static ElementsCollection links = $$(".srg>.g");
+
+    public static void navigateToGoogle() {
         open("https://www.google.com/ncr");
     }
 
-    public static void search(String query){
-        $("#lst-ib").setValue(query).submit();
+    public static void search(String query) {
+        $(".gsfi").setValue(query).submit();
     }
 
     public static void clickLink(String linkText) {
-        $(By.partialLinkText(linkText)).click();
+
+        for (SelenideElement link : links) {
+            if (link.shouldHave(text(linkText)) != null) {
+                link.$("h3>a").click();
+                break;
+            }
+        }
     }
 
     public static void assertAnswers(int count) {
-        $$(".g").shouldHaveSize(count);
+        links.shouldHaveSize(count);
     }
 
-    public static void assertTitle(String title){
+    public static void assertTitle(String title) {
         $(title()).shouldHave(exactText(title));
     }
 }

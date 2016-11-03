@@ -33,6 +33,6 @@ public class GoogleE2ETest {
 
         clickLink("Selenium automates browsers");
 
-        assertTitle("http://docs.seleniumhq.org/");
+        assertTitle("Selenium - Web Browser Automation");
     }
 }
