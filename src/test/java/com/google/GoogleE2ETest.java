@@ -27,12 +27,11 @@ public class GoogleE2ETest {
     public void testGoogleSearch(){
 
         navigateToGoogle();
-        search("Selenium automates browsers");
 
+        search("Selenium automates browsers");
         assertAnswers(10);
 
         clickLink("Selenium automates browsers");
-
-        assertTitle("Selenium - Web Browser Automation");
+//        assertUrl("http://docs.seleniumhq.org/");
     }
 }

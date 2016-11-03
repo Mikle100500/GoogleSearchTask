@@ -6,6 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.url;
+import static org.junit.Assert.assertEquals;
 
 
 public class GoogleSearch {
@@ -23,7 +25,8 @@ public class GoogleSearch {
     public static void clickLink(String linkText) {
 
         for (SelenideElement link : links) {
-            if (link.shouldHave(text(linkText)) != null) {
+
+            if (link.has(text(linkText))) {
                 link.$("h3>a").click();
                 break;
             }
@@ -34,7 +37,7 @@ public class GoogleSearch {
         links.shouldHaveSize(count);
     }
 
-    public static void assertTitle(String title) {
-        $(title()).shouldHave(exactText(title));
+    public static void assertUrl(String url) {
+        $(url()).shouldHave(exactText(url));
     }
 }
