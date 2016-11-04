@@ -31,7 +31,7 @@ public class GoogleSearch {
                 break;
             }
         }
-        $(title()).shouldBe(exist);
+        $("#promo").should(exist);
     }
 
     public static void assertAnswers(int count) {
