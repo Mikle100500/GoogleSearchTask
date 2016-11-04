@@ -1,12 +1,15 @@
 package com.google.pages;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
+import static org.junit.Assert.assertTrue;
 
 
 public class GoogleSearch {
@@ -27,10 +30,10 @@ public class GoogleSearch {
 
             if (link.has(text(linkText))) {
                 link.$("h3>a").click();
-                Wait();
                 break;
             }
         }
+        $(".homepage.push").shouldBe(exist);
     }
 
     public static void assertAnswers(int count) {
@@ -38,6 +41,6 @@ public class GoogleSearch {
     }
 
     public static void assertUrl(String url) {
-        $(url()).shouldHave(exactText(url));
+        assertTrue(url().equals(url));
     }
 }
