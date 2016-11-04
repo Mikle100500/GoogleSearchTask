@@ -32,6 +32,6 @@ public class GoogleE2ETest {
         assertAnswers(10);
 
         clickLink("Selenium automates browsers");
-//        assertUrl("http://docs.seleniumhq.org/");
+        assertUrl("http://docs.seleniumhq.org/");
     }
 }

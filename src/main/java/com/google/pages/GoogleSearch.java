@@ -7,7 +7,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
-import static org.junit.Assert.assertEquals;
 
 
 public class GoogleSearch {
@@ -28,6 +27,7 @@ public class GoogleSearch {
 
             if (link.has(text(linkText))) {
                 link.$("h3>a").click();
+                Wait();
                 break;
             }
         }
