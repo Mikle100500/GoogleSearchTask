@@ -1,10 +1,8 @@
 package com.google.pages;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
@@ -33,7 +31,7 @@ public class GoogleSearch {
                 break;
             }
         }
-        $(".homepage.push").shouldBe(exist);
+        $(title()).shouldBe(exist);
     }
 
     public static void assertAnswers(int count) {
