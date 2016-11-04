@@ -19,7 +19,7 @@ public class GoogleSearch {
     }
 
     public static void search(String query) {
-        $(".gsfi").setValue(query).submit();
+        $("#lst-ib").setValue(query).submit();
     }
 
     public static void clickLink(String linkText) {
