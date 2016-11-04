@@ -5,6 +5,7 @@ import org.junit.Test;
 import static com.google.pages.GoogleSearch.*;
 
 /**
+
  Automate:
  1 visit http://google.com/ncr
  2 search: “Selenium automates browsers”
@@ -12,13 +13,6 @@ import static com.google.pages.GoogleSearch.*;
  4 check the text “Selenium automates browsers” in 1st result
  5 follow the link in 1st result
  6 check that selenium official page is loaded
-
- Hint:
-
- You should follow the following strategy:
-
- - You will do only a smoke coverage and you most probably will not reuse "steps" in other tests.
- (Or you don't know will you reuse or not)
 
  */
 public class GoogleE2ETest {
