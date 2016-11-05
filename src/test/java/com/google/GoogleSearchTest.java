@@ -2,7 +2,11 @@ package com.google;
 
 import org.junit.Test;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.WebDriverRunner.url;
 import static com.google.pages.GoogleSearch.*;
+import static org.junit.Assert.assertTrue;
 
 /**
 
@@ -15,7 +19,7 @@ import static com.google.pages.GoogleSearch.*;
  6 check that selenium official page is loaded
 
  */
-public class GoogleE2ETest {
+public class GoogleSearchTest {
 
     @Test
     public void testGoogleSearch(){
@@ -25,7 +29,9 @@ public class GoogleE2ETest {
         search("Selenium automates browsers");
         assertAnswers(10);
 
-        clickLink("Selenium automates browsers");
-        assertUrl("http://docs.seleniumhq.org/");
+        followLink("Selenium automates browsers");
+        $("#mainContent>h2").shouldHave(text("What is Selenium?"));
+
+        assertTrue(url().equals("http://docs.seleniumhq.org/"));
     }
 }
