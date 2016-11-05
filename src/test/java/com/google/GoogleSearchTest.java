@@ -1,11 +1,13 @@
 package com.google;
 
+import com.codeborne.selenide.Selectors;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverRunner.url;
 import static com.google.pages.GoogleSearch.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -27,11 +29,12 @@ public class GoogleSearchTest {
         navigateToGoogle();
 
         search("Selenium automates browsers");
-        assertAnswers(10);
+        assertResultsCount(10);
+        assertTrue(results.get(0).shouldHave(text("Selenium automates browsers")).exists());
 
         followLink("Selenium automates browsers");
         $("#mainContent>h2").shouldHave(text("What is Selenium?"));
 
-        assertTrue(url().equals("http://docs.seleniumhq.org/"));
+        assertEquals(url(),"http://docs.seleniumhq.org/");
     }
 }

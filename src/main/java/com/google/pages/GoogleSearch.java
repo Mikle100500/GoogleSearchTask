@@ -23,7 +23,7 @@ public class GoogleSearch {
         results.findBy(text(linkText)).$("h3>a").click();
     }
 
-    public static void assertAnswers(int count) {
+    public static void assertResultsCount(int count) {
         results.shouldHaveSize(count);
     }
 }
