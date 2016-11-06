@@ -1,6 +1,5 @@
 package com.google;
 
-import com.codeborne.selenide.Selectors;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -8,7 +7,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverRunner.url;
 import static com.google.pages.GoogleSearch.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
 
@@ -30,9 +28,9 @@ public class GoogleSearchTest {
 
         search("Selenium automates browsers");
         assertResultsCount(10);
-        assertTrue(results.get(0).shouldHave(text("Selenium automates browsers")).exists());
+        results.get(0).shouldHave(text("Selenium automates browsers"));
 
-        followLink("Selenium automates browsers");
+        followFirstLink();
         $("#mainContent>h2").shouldHave(text("What is Selenium?"));
 
         assertEquals(url(),"http://docs.seleniumhq.org/");
