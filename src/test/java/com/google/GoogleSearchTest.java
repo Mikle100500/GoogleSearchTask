@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 public class GoogleSearchTest {
 
     @Test
-    public void testGoogleSearch(){
+    public void testSearchAndFollowLink(){
 
         navigateToGoogle();
 
@@ -30,9 +30,9 @@ public class GoogleSearchTest {
         assertResultsCount(10);
         results.get(0).shouldHave(text("Selenium automates browsers"));
 
-        followFirstLink();
-        $("#mainContent>h2").shouldHave(text("What is Selenium?"));
+        followFirstLink(0);
 
+        $("#mainContent>h2").shouldHave(text("What is Selenium?"));
         assertEquals(url(),"http://docs.seleniumhq.org/");
     }
 }
