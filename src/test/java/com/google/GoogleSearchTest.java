@@ -33,6 +33,6 @@ public class GoogleSearchTest {
         followFirstLink(0);
 
         $("#mainContent>h2").shouldHave(text("What is Selenium?"));
-        assertEquals(url(),"http://docs.seleniumhq.org/");
+        assertEquals("http://docs.seleniumhq.org/", url());
     }
 }
