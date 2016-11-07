@@ -18,7 +18,7 @@ public class GoogleSearch {
         $(By.name("q")).setValue(queryText).submit();
     }
 
-    public static void followFirstLink(int index) {
+    public static void followLink(int index) {
         results.get(index).$("h3>a").click();
     }
 

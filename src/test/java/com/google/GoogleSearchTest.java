@@ -30,7 +30,7 @@ public class GoogleSearchTest {
         assertResultsCount(10);
         results.get(0).shouldHave(text("Selenium automates browsers"));
 
-        followFirstLink(0);
+        followLink(0);
 
         $("#mainContent>h2").shouldHave(text("What is Selenium?"));
         assertEquals("http://docs.seleniumhq.org/", url());
