@@ -1,10 +1,12 @@
 package com.google;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.WebDriverRunner.url;
 import static com.google.pages.GoogleSearch.*;
 import static org.junit.Assert.assertEquals;
 
@@ -20,6 +22,15 @@ import static org.junit.Assert.assertEquals;
 
  */
 public class GoogleSearchTest {
+    @Before
+    public void setUp(){
+        driver = new ChromeDriver();
+    }
+
+    @After
+    public void tearDown(){
+        driver.quit();
+    }
 
     @Test
     public void testSearchAndFollowLink(){
@@ -28,13 +39,15 @@ public class GoogleSearchTest {
 
         search("Selenium automates browsers");
         assertResultsCount(10);
-        results.get(0).shouldHave(text("Selenium automates browsers"));
+        assertEquals("Selenium automates browsers", results.get(0).getText());
 
         followLink(0);
 
-        $("#mainContent>h2").shouldHave(text("What is Selenium?"));
-        assertEquals("http://docs.seleniumhq.org/", url());
+        WebElement mainContent = driver.findElement(By.cssSelector("#mainContent>h2"));
+        assertEquals("What is Selenium?", mainContent.getText());
 
-//        adding comments
+        assertEquals("http://docs.seleniumhq.org/", driver.getCurrentUrl());
+        driver.quit();
+
     }
 }
