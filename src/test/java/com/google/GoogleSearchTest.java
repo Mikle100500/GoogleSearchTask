@@ -1,13 +1,16 @@
 package com.google;
 
+import com.google.pages.GoogleSearch;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.google.pages.GoogleSearch.*;
+import static com.google.pages.GoogleSearch.driver;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -22,9 +25,14 @@ import static org.junit.Assert.assertEquals;
 
  */
 public class GoogleSearchTest {
+
+    {
+        System.setProperty("webdriver.chrome.driver", "C:/Users/Mikle/chromedriver_win32/chromedriver.exe");
+    }
+
     @Before
     public void setUp(){
-        driver = new ChromeDriver();
+       driver = new ChromeDriver();
     }
 
     @After
@@ -32,22 +40,25 @@ public class GoogleSearchTest {
         driver.quit();
     }
 
+
     @Test
     public void testSearchAndFollowLink(){
 
-        navigateToGoogle();
+        GoogleSearch page = new GoogleSearch();
 
-        search("Selenium automates browsers");
-        assertResultsCount(10);
-        assertEquals("Selenium automates browsers", results.get(0).getText());
+        page.navigateToGoogle();
 
-        followLink(0);
+        page.search("Selenium automates browsers");
+        page.assertResultsCount(10);
+        assertEquals("Selenium automates browsers", page.results.get(0).getText());
 
-        WebElement mainContent = driver.findElement(By.cssSelector("#mainContent>h2"));
+        page.followLink(0);
+
+        WebElement mainContent = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#mainContent>h2")));
         assertEquals("What is Selenium?", mainContent.getText());
 
         assertEquals("http://docs.seleniumhq.org/", driver.getCurrentUrl());
         driver.quit();
-
     }
 }
