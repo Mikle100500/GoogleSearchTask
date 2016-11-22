@@ -25,11 +25,11 @@ import static org.junit.Assert.assertTrue;
  */
 public class GoogleSearchTest {
 
-    {
+    static{
         System.setProperty("webdriver.chrome.driver", "C:/Users/Mikle/chromedriver_win32/chromedriver.exe");
     }
 
-    public static WebDriver driver;
+    private static WebDriver driver;
     private ExamplePage page = PageFactory.initElements(driver, ExamplePage.class);
 
     @BeforeClass
@@ -38,7 +38,7 @@ public class GoogleSearchTest {
     }
 
     @AfterClass
-    public void tearDown(){
+    public  static void tearDown(){
         driver.quit();
     }
 
@@ -48,7 +48,7 @@ public class GoogleSearchTest {
         driver.get("https://google.com/ncr");
         driver.findElement(By.name("q")).sendKeys("Selenium automates browsers" + Keys.ENTER);
 
-        assertTrue((new WebDriverWait(driver, 10))
+        assertTrue((new WebDriverWait(driver, 5))
                 .until(com.google.search.core.ExpectedConditions.sizeOf(page.elements, 10)));
 
 
@@ -56,7 +56,7 @@ public class GoogleSearchTest {
 
         page.elements.get(0).findElement(By.cssSelector("h3>a")).click();
 
-        assertTrue((new WebDriverWait(driver, 10))
+        assertTrue((new WebDriverWait(driver, 5))
                 .until(ExpectedConditions.urlToBe("http://docs.seleniumhq.org/")));
     }
 }
