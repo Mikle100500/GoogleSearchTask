@@ -18,4 +18,18 @@ public class ExpectedConditions {
             }
         };
     }
+
+    public static ExpectedCondition<Boolean> textInElements(final List<WebElement> elements, final String expectedText) {
+        return new ExpectedCondition<Boolean>() {
+            private boolean textExists = false;
+            public Boolean apply(WebDriver driver) {
+                for (WebElement element : elements){
+                    if (element.getText().contains(expectedText)){
+                        textExists = true;
+                    }
+                }
+                return textExists;
+            }
+        };
+    }
 }
