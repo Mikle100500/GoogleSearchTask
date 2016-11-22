@@ -1,19 +1,17 @@
-package com.google;
+package com.search;
 
-import org.junit.After;
-import org.junit.Before;
+import com.google.search.pages.ExamplePage;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -32,13 +30,14 @@ public class GoogleSearchTest {
     }
 
     public static WebDriver driver;
+    private ExamplePage page = PageFactory.initElements(driver, ExamplePage.class);
 
-    @Before
-    public void setUp(){
+    @BeforeClass
+    public static void setUp(){
         driver = new ChromeDriver();
     }
 
-    @After
+    @AfterClass
     public void tearDown(){
         driver.quit();
     }
@@ -49,17 +48,16 @@ public class GoogleSearchTest {
         driver.get("https://google.com/ncr");
         driver.findElement(By.name("q")).sendKeys("Selenium automates browsers" + Keys.ENTER);
 
-        List<WebElement> results = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("#rso>.g>.rc, .srg>.g")));
+        assertTrue((new WebDriverWait(driver, 10))
+                .until(com.google.search.core.ExpectedConditions.sizeOf(page.elements, 10)));
 
-        assertEquals(10, results.size());
-        assertTrue(results.get(0).findElement(By.cssSelector(".st")).getText().contains("Selenium automates browsers"));
 
-        results.get(0).findElement(By.cssSelector("h3>a")).click();
+        assertTrue(page.elements.get(0).getText().contains("Selenium automates browsers"));
 
-        assertTrue(driver.findElement(By.cssSelector("#mainContent>h2")).getText().contains("What is Selenium?"));
-        assertEquals("http://docs.seleniumhq.org/", driver.getCurrentUrl());
+        page.elements.get(0).findElement(By.cssSelector("h3>a")).click();
 
+        assertTrue((new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.urlToBe("http://docs.seleniumhq.org/")));
     }
 }
 
