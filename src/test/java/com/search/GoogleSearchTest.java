@@ -52,12 +52,12 @@ public class GoogleSearchTest {
 
         wait.until(textInElements(By.cssSelector("#rso>.g>.rc, .srg>.g"), 0, "Selenium automates browsers"));
 
-        fillowLink(0);
+        followLink(0);
 
         wait.until(ExpectedConditions.urlToBe("http://docs.seleniumhq.org/"));
     }
 
-    private void fillowLink(int linkIndex){
+    private void followLink(int linkIndex){
 
         driver.findElements(By.cssSelector("#rso>.g>.rc, .srg>.g"))
                 .get(linkIndex)
