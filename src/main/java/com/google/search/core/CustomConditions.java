@@ -23,16 +23,16 @@ public class CustomConditions {
             }
 
             public String toString() {
-                return String.format("\nSize of list: %s\nExpected to be: %s\nActual size is: %s\n"
-                        , elements
+                return String.format("\nElement's locator - %s\nExpected size to be: %s\nActual size is: %s\n"
+                        , elementsLocator
                         , expectedSize
                         , listSize);
             }
         };
     }
 
-    public static ExpectedCondition<Boolean> textInElements(final By elementsLicator
-            , final int linkIndex
+    public static ExpectedCondition<Boolean> nthListElementHasText(final By elementsLocator
+            , final int index
             , final String expectedText) {
         return new ExpectedCondition<Boolean>() {
 
@@ -40,15 +40,20 @@ public class CustomConditions {
             private String currentText;
 
             public Boolean apply(WebDriver driver) {
-                elements = driver.findElements(elementsLicator);
-                currentText = elements.get(linkIndex).getText();
+                try {
+                    elements = driver.findElements(elementsLocator);
+                    currentText = elements.get(index).getText();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return currentText.contains(expectedText);
             }
 
             public String toString() {
-                return String.format("\nCurrent text of element with index %s is: %s\nExpected text: %s"
-                        , linkIndex
+                return String.format("\nText of element with index %s is:\n%s\nElement locator - %s\nExpected text: %s"
+                        , index
                         , currentText
+                        , elementsLocator.toString()
                         , expectedText);
             }
         };
