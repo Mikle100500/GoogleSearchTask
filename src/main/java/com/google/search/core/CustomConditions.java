@@ -18,9 +18,9 @@ public class CustomConditions {
 
             public Boolean apply(WebDriver driver) {
 
-                    elements = driver.findElements(elementsLocator);
-                    listSize = elements.size();
-                    return listSize == expectedSize;
+                elements = driver.findElements(elementsLocator);
+                listSize = elements.size();
+                return listSize == expectedSize;
             }
 
             public String toString() {
@@ -63,6 +63,7 @@ public class CustomConditions {
             }
         };
     }
+
     public static ExpectedCondition<Boolean> elementIsLoaded(final By elementsLocator, final int index) {
         return new ExpectedCondition<Boolean>() {
 
