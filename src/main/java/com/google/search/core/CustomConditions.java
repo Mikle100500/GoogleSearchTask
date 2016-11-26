@@ -63,4 +63,27 @@ public class CustomConditions {
             }
         };
     }
+    public static ExpectedCondition<Boolean> elementIsLoaded(final By elementsLocator, final int index) {
+        return new ExpectedCondition<Boolean>() {
+
+            private List<WebElement> elements;
+
+            public Boolean apply(WebDriver driver) {
+                try {
+                    elements = driver.findElements(elementsLocator);
+                    return elements.get(index).isDisplayed();
+                } catch (IndexOutOfBoundsException e) {
+                    return false;
+                }
+            }
+
+            public String toString() {
+                return String.format("\nElement with index %s"
+                                + "\nwithin elements %s"
+                                + "\nNOT FOUND at the page"
+                        , index
+                        , elementsLocator.toString());
+            }
+        };
+    }
 }
