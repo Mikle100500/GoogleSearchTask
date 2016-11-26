@@ -17,13 +17,16 @@ public class CustomConditions {
             private List<WebElement> elements;
 
             public Boolean apply(WebDriver driver) {
-                elements = driver.findElements(elementsLocator);
-                listSize = elements.size();
-                return listSize == expectedSize;
+
+                    elements = driver.findElements(elementsLocator);
+                    listSize = elements.size();
+                    return listSize == expectedSize;
             }
 
             public String toString() {
-                return String.format("\nElement's locator - %s\nExpected size to be: %s\nActual size is: %s\n"
+                return String.format("\nSize of list located by %s"
+                                + "\nExpected size should be: %s"
+                                + "\nActual size is: %s\n"
                         , elementsLocator
                         , expectedSize
                         , listSize);
@@ -43,18 +46,20 @@ public class CustomConditions {
                 try {
                     elements = driver.findElements(elementsLocator);
                     currentText = elements.get(index).getText();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    return currentText.contains(expectedText);
+                } catch (IndexOutOfBoundsException e) {
+                    return false;
                 }
-                return currentText.contains(expectedText);
             }
 
             public String toString() {
-                return String.format("\nText of element with index %s is:\n%s\nElement locator - %s\nExpected text: %s"
+                return String.format("\nText of %s element, located %s"
+                                + "\nExpected text should be: %s"
+                                + "\nActual text is: %s\n"
                         , index
-                        , currentText
                         , elementsLocator.toString()
-                        , expectedText);
+                        , expectedText
+                        , currentText);
             }
         };
     }
