@@ -14,13 +14,12 @@ public class CustomConditions {
         return new ExpectedCondition<Boolean>() {
 
             private int listSize;
-            private List<WebElement> elements;
 
             public Boolean apply(WebDriver driver) {
-
-                    elements = driver.findElements(elementsLocator);
-                    listSize = elements.size();
-                    return listSize == expectedSize;
+                List<WebElement> elements;
+                elements = driver.findElements(elementsLocator);
+                listSize = elements.size();
+                return listSize == expectedSize;
             }
 
             public String toString() {
@@ -39,11 +38,11 @@ public class CustomConditions {
             , final String expectedText) {
         return new ExpectedCondition<Boolean>() {
 
-            private List<WebElement> elements;
             private String currentText;
 
             public Boolean apply(WebDriver driver) {
                 try {
+                    List<WebElement> elements;
                     elements = driver.findElements(elementsLocator);
                     currentText = elements.get(index).getText();
                     return currentText.contains(expectedText);
