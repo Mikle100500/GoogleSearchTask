@@ -14,10 +14,9 @@ public class CustomConditions {
         return new ExpectedCondition<Boolean>() {
 
             private int listSize;
-            private List<WebElement> elements;
 
             public Boolean apply(WebDriver driver) {
-
+                List<WebElement> elements;
                 elements = driver.findElements(elementsLocator);
                 listSize = elements.size();
                 return listSize == expectedSize;
@@ -39,11 +38,11 @@ public class CustomConditions {
             , final String expectedText) {
         return new ExpectedCondition<Boolean>() {
 
-            private List<WebElement> elements;
             private String currentText;
 
             public Boolean apply(WebDriver driver) {
                 try {
+                    List<WebElement> elements;
                     elements = driver.findElements(elementsLocator);
                     currentText = elements.get(index).getText();
                     return currentText.contains(expectedText);
@@ -64,24 +63,23 @@ public class CustomConditions {
         };
     }
 
-    public static ExpectedCondition<Boolean> elementIsLoaded(final By elementsLocator, final int index) {
-        return new ExpectedCondition<Boolean>() {
+    public static ExpectedCondition<WebElement> nthElementIsVisible(final By elementsLocator, final int index) {
+        return new ExpectedCondition<WebElement>() {
 
-            private List<WebElement> elements;
-
-            public Boolean apply(WebDriver driver) {
+            public WebElement apply(WebDriver driver) {
                 try {
+                    List<WebElement> elements;
                     elements = driver.findElements(elementsLocator);
-                    return elements.get(index).isDisplayed();
+                    return elements.get(index).isDisplayed() ? elements.get(index) : null;
                 } catch (IndexOutOfBoundsException e) {
-                    return false;
+                    return null;
                 }
             }
 
             public String toString() {
-                return String.format("\nElement with index %s"
-                                + "\nwithin elements %s"
-                                + "\nNOT FOUND at the page"
+                return String.format("\nWebElement should have had:"
+                                + "\nIndex - %s"
+                                + "\nLocator - %s\n"
                         , index
                         , elementsLocator.toString());
             }

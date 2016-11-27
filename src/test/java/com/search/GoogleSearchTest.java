@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.google.search.core.CustomConditions.elementIsLoaded;
+import static com.google.search.core.CustomConditions.nthElementIsVisible;
 import static com.google.search.core.CustomConditions.sizeOf;
 import static com.google.search.core.CustomConditions.nthListElementHasText;
 
@@ -32,7 +32,7 @@ public class GoogleSearchTest {
 
     private static WebDriver driver;
     private WebDriverWait wait = new WebDriverWait(driver, 5);
-    private By links = By.cssSelector("#rso>.g>.rc, .srg>.g");
+    private By results = By.cssSelector("#rso>.g>.rc, .srg>.g");
 
     @BeforeClass
     public static void setUp() {
@@ -50,9 +50,9 @@ public class GoogleSearchTest {
         driver.get("https://google.com/ncr");
         driver.findElement(By.name("q")).sendKeys("Selenium automates browsers" + Keys.ENTER);
 
-        wait.until(sizeOf(links, 10));
+        wait.until(sizeOf(results, 10));
 
-        wait.until(nthListElementHasText(links, 0, "Selenium automates browsers"));
+        wait.until(nthListElementHasText(results, 0, "Selenium automates browsers"));
     }
 
     @Test
@@ -67,9 +67,7 @@ public class GoogleSearchTest {
 
     private void followLink(int index) {
 
-        wait.until(elementIsLoaded(links, index));
-        driver.findElements(links)
-                .get(index)
+        wait.until(nthElementIsVisible(results, index))
                 .findElement(By.cssSelector("h3>a"))
                 .click();
     }
