@@ -16,8 +16,7 @@ public class CustomConditions {
             private int listSize;
 
             public Boolean apply(WebDriver driver) {
-                List<WebElement> elements;
-                elements = driver.findElements(elementsLocator);
+                List<WebElement> elements = driver.findElements(elementsLocator);
                 listSize = elements.size();
                 return listSize == expectedSize;
             }
@@ -42,8 +41,7 @@ public class CustomConditions {
 
             public Boolean apply(WebDriver driver) {
                 try {
-                    List<WebElement> elements;
-                    elements = driver.findElements(elementsLocator);
+                    List<WebElement> elements = driver.findElements(elementsLocator);
                     currentText = elements.get(index).getText();
                     return currentText.contains(expectedText);
                 } catch (IndexOutOfBoundsException e) {
@@ -68,8 +66,7 @@ public class CustomConditions {
 
             public WebElement apply(WebDriver driver) {
                 try {
-                    List<WebElement> elements;
-                    elements = driver.findElements(elementsLocator);
+                    List<WebElement> elements = driver.findElements(elementsLocator);
                     return elements.get(index).isDisplayed() ? elements.get(index) : null;
                 } catch (IndexOutOfBoundsException e) {
                     return null;
