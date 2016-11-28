@@ -64,12 +64,12 @@ public class CustomConditions {
     public static ExpectedCondition<WebElement> nthElementIsVisible(final By elementsLocator, final int index) {
         return new ExpectedCondition<WebElement>() {
             List<WebElement> elements;
-            WebElement actualResult;
+            WebElement element;
             public WebElement apply(WebDriver driver) {
                 try {
                     elements = driver.findElements(elementsLocator);
-                    actualResult = elements.get(index);
-                    return actualResult.isDisplayed() ? actualResult : null;
+                    element = elements.get(index);
+                    return element.isDisplayed() ? element : null;
                 } catch (IndexOutOfBoundsException e) {
                     return null;
                 }
@@ -79,10 +79,10 @@ public class CustomConditions {
                 return String.format("\nExpected:"
                                 + "\nVisibility of WebElement with index %s"
                                 + "\nby locator - %s"
-                                + "\nActual result: %s\n"
+                                + "\nActual resul: %s\n"
                         , index
                         , elementsLocator.toString()
-                        , actualResult);
+                        , element);
             }
         };
     }
