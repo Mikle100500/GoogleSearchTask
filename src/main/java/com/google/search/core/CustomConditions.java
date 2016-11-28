@@ -79,7 +79,7 @@ public class CustomConditions {
                 return String.format("\nExpected:"
                                 + "\nVisibility of WebElement with index %s"
                                 + "\nby locator - %s"
-                                + "\nActual resul: %s\n"
+                                + "\nActual result: %s\n"
                         , index
                         , elementsLocator.toString()
                         , element);
