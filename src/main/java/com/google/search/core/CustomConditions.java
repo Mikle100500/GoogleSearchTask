@@ -63,26 +63,26 @@ public class CustomConditions {
 
     public static ExpectedCondition<WebElement> nthElementIsVisible(final By elementsLocator, final int index) {
         return new ExpectedCondition<WebElement>() {
-            List<WebElement> elements;
-            WebElement element;
+
+            Boolean currentState;
+
             public WebElement apply(WebDriver driver) {
                 try {
-                    elements = driver.findElements(elementsLocator);
-                    element = elements.get(index);
-                    return element.isDisplayed() ? element : null;
+                    List<WebElement> elements = driver.findElements(elementsLocator);
+                    currentState = elements.get(index).isDisplayed();
+                    return currentState ? elements.get(index) : null;
                 } catch (IndexOutOfBoundsException e) {
                     return null;
                 }
             }
 
             public String toString() {
-                return String.format("\nExpected:"
-                                + "\nVisibility of WebElement with index %s"
-                                + "\nby locator - %s"
-                                + "\nActual result: %s\n"
+                return String.format("\nVisibility of %s element, located %s"
+                                + "\nExpected visibility state: true"
+                                + "\nActual visibility state: %s\n"
                         , index
                         , elementsLocator.toString()
-                        , element);
+                        , currentState);
             }
         };
     }
